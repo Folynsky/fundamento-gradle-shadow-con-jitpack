@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+jar{
+    manifest {
+        attributes "Main-Class": "org.example.Main"
+    }
+    archiveClassifier = "programa"
+    archiveBaseName = "hola3"
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://jitpack.io"
+        name "jitpack"
+    }
+}
+
+dependencies {
+//    implementation "" //Depende en su totalidad de la dependecia para funcionar
+//    compileOnly "" //Solo necesaria para la compilacion del proyecto
+//    implementation group: "group", name: "nombre", version: "1.0"//forma limpia
+//    implementation "group:name:version" //forma mas usual
+    shadow "co.wosher:jnanoid-enhanced:main-SNAPSHOT"
+
+}
+shadowJar{
+    configurations = [project.configurations.shadow]
+
+    archiveClassifier = "shadow"
+
+//    relocate "com.wosher.jnanoidenhanced", "org.example.libs.jnanoidenhanced"
+}
+
+//dependencies {
+//    testImplementation platform('org.junit:junit-bom:5.10.0')
+//    testImplementation 'org.junit.jupiter:junit-jupiter'
+//}
+
+test {
+    useJUnitPlatform()
+}
+
+//def nombreVariable = "Texto de ejemplo"
+//
+//def sumar(a,b){
+//    return a + b
+//}
